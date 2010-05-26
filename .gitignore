@@ -5,3 +5,4 @@ _darcs
 #*
 *.ffasl
 *.lib
+*.lx64fsl

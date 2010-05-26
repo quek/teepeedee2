@@ -4,7 +4,6 @@
   :version "prerelease"
   :description "Tests for teepeedee2"
   :components ((:module :t 
-	   
 			:components (
 				     (:file "suite")
 				     (:file "io" :depends-on ("suite"))

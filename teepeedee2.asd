@@ -17,10 +17,10 @@
   (pushnew :tpd2-debug-assert *features*))
 
 (asdf:defsystem :teepeedee2
-  :name "teepeedee2"
+  :name "teepeedee2 web server"
   :author "John Fremlin <john@fremlin.org>"
   :version "prerelease"
-  :description "Multiprotocol fast networking framework"
+  :description "Multiprotocol fast networking server"
 
   :components (
 	       (:module :src
@@ -68,66 +68,7 @@
 							   (:file "dispatcher" :depends-on ("servestate"))
 							   (:file "servestate")
 							   (:file "serve" :depends-on ("encoding" "headers" "dispatcher"))
-							   (:file "request" :depends-on ("headers"))))
-				     (:module :ml
-					      :depends-on (:lib :io)
-					      :components (
-							   (:file "output")
-							   (:file "object-to-ml" :depends-on ("output"))
-							   (:file "define-dtd" :depends-on ("object-to-ml"))
-							   (:file "css" :depends-on ("html"))
-							   (:file "js" :depends-on ("html"))
-							   (:file "html" :depends-on ("define-dtd"))
-							   (:file "atom" :depends-on ("define-dtd"))
-							   (:file "rss" :depends-on ("define-dtd"))))
-				     (:module :datastore
-					      :depends-on (:lib)
-					      :components ((:file "datastore")))
-				     (:module :webapp
-					      :depends-on (:http :ml)
-					      :components ((:file "page" :depends-on ("site"))
-							   (:file "list-channel" :depends-on ("simple-channel"))
-							   (:file "simple-channel" :depends-on ("channel"))
-							   (:file "frame" :depends-on ("names" "list-channel" "simple-channel"))
-							   (:file "names")
-							   (:file "html-constants")
-							   (:file "site" :depends-on ("html-constants"))
-							   (:file "default-site" :depends-on ("site" "webapp" "js-library"))
-							   (:file "js-library" :depends-on ("html-constants" "page"))
-							   (:file "actions" :depends-on ("page" "html-constants" "frame" "site"))
-							   (:file "channel" :depends-on ("page" "html-constants"))
-							   (:file "webapp" :depends-on ("actions"))
-							   (:file "message-channel" :depends-on ("channel"))))
-				     (:module :game
-					      :depends-on (:webapp :ml )
-					      :components (
-							   (:file "generic")
-							   (:file "framework" :depends-on ("generic")) 
-							   (:file "controllers" :depends-on ("framework"))
-							   (:file "card")
-							   (:file "coins" :depends-on ("framework"))
-							   (:file "unassigned-controller" :depends-on ("controllers"))
-							   (:file "web" :depends-on ("card" "controllers" "unassigned-controller"))
-							   (:file "web-messages" :depends-on ("web"))))
-				     (:module :small-games
-					      :depends-on (:game)
-					      :components (
-							   (:file "nash-bargain") 
-							   (:file "prisoners-dilemma") 
-							   (:file "ultimatum")
-							   (:file "roshambo")))
-				     (:module :blog
-					      :depends-on (:webapp :ml :datastore)
-					      :components ((:file "entry")
-							   (:file "feed" :depends-on ("blog"))
-							   (:file "blog" :depends-on ("entry"))))
-				     (:module :survey
-					      :depends-on (:webapp :ml :datastore)
-					      :components ((:file "survey")))
-				     (:module :truc
-					      :depends-on (:game)
-					      :components ( (:file "truc") (:file "web" :depends-on ("truc"))
-							    (:file "robots" :depends-on ("truc")))))))
+							   (:file "request" :depends-on ("headers")))))))
   :depends-on (
 	       :trivial-garbage
 	       :cl-cont
